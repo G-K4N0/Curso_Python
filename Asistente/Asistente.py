@@ -1,7 +1,7 @@
-import pyttsx3 #pip install pyttsx3
-import speech_recognition as sr #pip install speechRecognition
+import pyttsx3 
+import speech_recognition as sr 
 import datetime
-import wikipedia #pip install wikipedia
+import wikipedia 
 import webbrowser
 import os
 import smtplib
@@ -30,7 +30,6 @@ def wishMe():
     speak("Soy su asistente,Digame que vamos a hacer hoy?")       
 
 def takeCommand():
-    #It takes microphone input from the user and returns string output
 
     r = sr.Recognizer()
     with sr.Microphone() as source:
@@ -44,8 +43,7 @@ def takeCommand():
         query = r.recognize_google(audio, language='es-MX')
         print(f"Usted dijo: {query}\n")
 
-    except Exception as e:
-        # print(e)    
+    except Exception as e:    
         print("Repitalo de nuevo por favor...")  
         return "None"
     return query
@@ -61,10 +59,8 @@ def sendEmail(to, content):
 if __name__ == "__main__":
     wishMe()
     while True:
-    # if 1:
         query = takeCommand().lower()
 
-        # Logic for executing tasks based on query
         if 'abre wikipedia' in query:
             speak('Buscando Wikipedia...')
             query = query.replace("wikipedia", "")
@@ -96,14 +92,3 @@ if __name__ == "__main__":
         elif 'abre code' in query:
             codePath = "C:\\Users\\K4TO\\AppData\\Local\\Programs\\Microsoft VS Code\\bin\\Code.exe"
             os.startfile(codePath)
-
-        elif 'email to harry' in query:
-            try:
-                speak("What should I say?")
-                content = takeCommand()
-                to = "harryyourEmail@gmail.com"    
-                sendEmail(to, content)
-                speak("Email has been sent!")
-            except Exception as e:
-                print(e)
-                speak("Sorry my friend harry bhai. I am not able to send this email")    
